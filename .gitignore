@@ -3,3 +3,4 @@ node_modules
 *.log
 _dev
 _prod
+_dist

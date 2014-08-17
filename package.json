@@ -4,6 +4,13 @@
   "private": true,
   "devDependencies": {
     "gulp": "~3.8.7",
+    "gulp-watch": "^0.6.9",
+    "gulp-zip": "^2.0.1",
     "zunder": "~0.3.2"
+  },
+  "dependencies": {
+    "fastclick": "~1.0.3",
+    "react": "~0.11.1",
+    "rsvp": "~3.0.13"
   }
 }

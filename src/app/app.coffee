@@ -1,5 +1,6 @@
 React = require 'react'
 RSVP = require 'rsvp'
+store = require '../shared/store'
 BoardList = require '../boards/board-list'
 
 LS_KEY = 'scorekeeper'
@@ -20,8 +21,11 @@ module.exports = React.createClass
       onUpdate: @update
 
   getInitialState: ->
-    data = JSON.parse(localStorage[LS_KEY] or '{}')
-    boards: data.boards or []
+    boards: []
+
+  componentDidMount: ->
+    store.fetch(LS_KEY).then (data)=>
+      @setState boards: data.boards or []
 
   update: (boards)->
     @save boards
@@ -29,4 +33,4 @@ module.exports = React.createClass
       @setState boards: boards, resolve
 
   save: debounce 300, (boards)->
-    localStorage[LS_KEY] = JSON.stringify boards: boards
+    store.save LS_KEY, boards: boards
