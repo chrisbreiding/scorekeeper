@@ -17,6 +17,8 @@
 		4B1F1A231BF018F600330E0E /* BoardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1F1A221BF018F600330E0E /* BoardsViewController.swift */; };
 		4B1F1A251BF03DFF00330E0E /* BoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1F1A241BF03DFF00330E0E /* BoardCell.swift */; };
 		4B54F9191BF5C30000A8487A /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B54F9181BF5C30000A8487A /* SwiftyJSON.swift */; };
+		4B54F91B1BF6167100A8487A /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B54F91A1BF6167100A8487A /* Util.swift */; };
+		4B54F91D1BF617F600A8487A /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B54F91C1BF617F600A8487A /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		4B1F1A221BF018F600330E0E /* BoardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardsViewController.swift; sourceTree = "<group>"; };
 		4B1F1A241BF03DFF00330E0E /* BoardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardCell.swift; sourceTree = "<group>"; };
 		4B54F9181BF5C30000A8487A /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		4B54F91A1BF6167100A8487A /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		4B54F91C1BF617F600A8487A /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,8 @@
 				4B1F1A201BEFF48800330E0E /* ScoreModel.swift */,
 				4B54F9181BF5C30000A8487A /* SwiftyJSON.swift */,
 				4B1F1A111BEFADC800330E0E /* ViewController.swift */,
+				4B54F91A1BF6167100A8487A /* Util.swift */,
+				4B54F91C1BF617F600A8487A /* Data.swift */,
 			);
 			path = Scorekeeper;
 			sourceTree = "<group>";
@@ -150,6 +156,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B1F1A211BEFF48800330E0E /* ScoreModel.swift in Sources */,
+				4B54F91D1BF617F600A8487A /* Data.swift in Sources */,
+				4B54F91B1BF6167100A8487A /* Util.swift in Sources */,
 				4B1F1A1F1BEFF3EB00330E0E /* BoardModel.swift in Sources */,
 				4B1F1A121BEFADC800330E0E /* ViewController.swift in Sources */,
 				4B54F9191BF5C30000A8487A /* SwiftyJSON.swift in Sources */,

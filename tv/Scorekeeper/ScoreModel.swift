@@ -2,22 +2,22 @@ import Foundation
 
 class ScoreModel : Equatable {
     var id: Int
-    var score: Int
+    var value: Int
     
-    init(id: Int, score: Int) {
+    init(id: Int, score: Int = 0) {
         self.id = id
-        self.score = score
+        self.value = score
     }
     
-    static func deserialize(scores: [JSON]) -> [ScoreModel] {
+    class func deserialize(scores: [JSON]) -> [ScoreModel] {
         return scores.map { score in
             ScoreModel(id: score["id"].intValue, score: score["score"].intValue)
         }
     }
     
-    static func serialize(scores: [ScoreModel]) -> [AnyObject] {
+    class func serialize(scores: [ScoreModel]) -> [AnyObject] {
         return scores.map { score in
-            ["id": score.id, "score": score.score]
+            ["id": score.id, "score": score.value]
         }
     }
 }

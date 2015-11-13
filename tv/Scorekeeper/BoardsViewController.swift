@@ -8,35 +8,21 @@ class BoardsViewController : UICollectionViewController, UICollectionViewDelegat
     var boards: [BoardModel] = []
     
     override func viewDidLoad() {
-        if let dataString = localStorage.stringForKey(DATA_KEY) {
-            boards = deserializeData(dataString)
-            self.collectionView?.reloadData()
-        }
         super.viewDidLoad()
+        
+        boards = Data.load()
+        reloadCollectionData()
+    }
+
+    func saveAndReload() {
+        Data.save(boards)
+        reloadCollectionData()
     }
     
-    func deserializeData(dataString: String) -> [BoardModel] {
-        if let data = dataString.dataUsingEncoding(NSUTF8StringEncoding) {
-            let json = JSON(data: data)
-            let boards = json["boards"].arrayValue
-            return BoardModel.deserialize(boards)
-        }
-        return []
+    func reloadCollectionData() {
+        self.collectionView?.reloadData()
     }
-    
-    func serializeData(boards: [BoardModel]) -> String {
-        let json: JSON = ["boards": BoardModel.serialize(boards)]
-        if let jsonString = json.rawString() {
-            return jsonString
-        }
-        return ""
-    }
-    
-    func saveData() {
-        let dataString = serializeData(boards)
-        localStorage.setObject(dataString, forKey: DATA_KEY)
-    }
-    
+
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return boards.count + 1
     }
@@ -45,7 +31,7 @@ class BoardsViewController : UICollectionViewController, UICollectionViewDelegat
         if indexPath.row < boards.count {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("BoardCell", forIndexPath: indexPath) as! BoardCell
             let board = boards[indexPath.row]
-            cell.setBoardProps(board, onUpdateName: handleUpdateName(indexPath.row), onRemove: handleBoardRemoval)
+            cell.setBoardProps(board, onUpdateName: partial(updateName, with: indexPath.row), onRemove: partial(removeBoard, with: indexPath.row))
             return cell
         } else {
             return collectionView.dequeueReusableCellWithReuseIdentifier("AddBoardCell", forIndexPath: indexPath) as! AddBoardCell
@@ -55,7 +41,7 @@ class BoardsViewController : UICollectionViewController, UICollectionViewDelegat
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         guard let boardCell = cell as? BoardCell else { return }
         boardCell.setScoresViewDataSourceDelegate(self, forRow: indexPath.row)
-        boardCell.setAddScoreHandler(addScoreTo(boards[indexPath.row]))
+        boardCell.setAddScoreHandler(partial(addScore, with: boards[indexPath.row]))
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -64,26 +50,18 @@ class BoardsViewController : UICollectionViewController, UICollectionViewDelegat
     }
     
     @IBAction func onAddBoard() {
-        boards.append(BoardModel(id: newBoardId(), name: ""))
-        saveData()
-        self.collectionView?.reloadData()
+        boards.append(BoardModel(id: newBoardId()))
+        saveAndReload()
     }
     
-    func handleUpdateName(index: Int) -> (String -> Void) {
-        func updateName(name: String) {
-            boards[index].name = name
-            saveData()
-        }
-        return updateName
+    func updateName(index: Int, name: String) {
+        boards[index].name = name
+        saveAndReload()
     }
     
-    func addScoreTo(board: BoardModel) -> (Void -> Void) {
-        func addScore() {
-            board.scores.append(ScoreModel(id: newScoreId(board.scores), score: 0))
-            saveData()
-            self.collectionView?.reloadData()
-        }
-        return addScore
+    func addScore(board: BoardModel) {
+        board.add(ScoreModel(id: newScoreId(board.scores)))
+        saveAndReload()
     }
     
     func newBoardId() -> Int {
@@ -96,12 +74,9 @@ class BoardsViewController : UICollectionViewController, UICollectionViewDelegat
         return (maxId != nil) ? maxId! + 1 : 0
     }
 
-    func handleBoardRemoval(board: BoardModel) {
-        if let index = boards.indexOf({ thisBoard in thisBoard.id == board.id }) {
-            boards.removeAtIndex(index)
-            saveData()
-            self.collectionView?.reloadData()
-        }
+    func removeBoard(index: Int) {
+        boards.removeAtIndex(index)
+        saveAndReload()
     }
 }
 
@@ -113,30 +88,22 @@ extension BoardsViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.row < boards[tableView.tag].scores.count {
             let cell = tableView.dequeueReusableCellWithIdentifier("ScoreCell", forIndexPath: indexPath) as! ScoreCell
-            let updateScore = handleUpdateScoreFor(tableView.tag, scoreIndex: indexPath.row)
-            let removeScore = handleRemoveScoreFor(tableView.tag, scoreIndex: indexPath.row)
-            cell.setScoreProps(boards[tableView.tag].scores[indexPath.row], onUpdateScore: updateScore, onRemove: removeScore)
+            let onUpdateScore = partial(updateScore, with: tableView.tag, and: indexPath.row)
+            let onRemoveScore = partial(removeScore, with: tableView.tag, and: indexPath.row)
+            cell.setScoreProps(boards[tableView.tag].scores[indexPath.row], onUpdateScore: onUpdateScore, onRemove: onRemoveScore)
             return cell
         } else {
             return tableView.dequeueReusableCellWithIdentifier("AddScoreCell", forIndexPath: indexPath) as! AddScoreCell
         }
     }
 
-    func handleUpdateScoreFor(boardIndex: Int, scoreIndex: Int) -> (ScoreModel -> Void) {
-        func updateScore(score: ScoreModel) {
-            boards[boardIndex].scores[scoreIndex] = score
-            saveData()
-            self.collectionView?.reloadData()
-        }
-        return updateScore
+    func updateScore(boardIndex: Int, scoreIndex: Int, score: ScoreModel) {
+        boards[boardIndex].scores[scoreIndex] = score
+        saveAndReload()
     }
 
-    func handleRemoveScoreFor(boardIndex: Int, scoreIndex: Int) -> (Void -> Void) {
-        func removeScore() {
-            boards[boardIndex].scores.removeAtIndex(scoreIndex)
-            saveData()
-            self.collectionView?.reloadData()
-        }
-        return removeScore
+    func removeScore(boardIndex: Int, scoreIndex: Int) {
+        boards[boardIndex].removeScoreAt(scoreIndex)
+        saveAndReload()
     }
 }

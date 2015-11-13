@@ -7,17 +7,15 @@ class BoardCell : UICollectionViewCell, UITextFieldDelegate {
     @IBOutlet var scoresTotalView: UITextView!
 
     var board: BoardModel?
-    var onUpdateName: (String -> Void)?
-    var onAddScore: (Void -> Void)?
-    var onRemove: (BoardModel -> Void)?
+    var onUpdateName: (String -> ())?
+    var onAddScore: (() -> ())?
+    var onRemove:( () -> ())?
     var scoresTotal: Int {
-        get {
-            guard let scores = board?.scores else { return 0 }
-            return scores.reduce(0, combine: { total, score in total + score.score })
-        }
+        guard let scores = board?.scores else { return 0 }
+        return scores.reduce(0, combine: { total, score in total + score.value })
     }
     
-    func setBoardProps(board: BoardModel, onUpdateName: (String -> Void), onRemove: (BoardModel -> Void)) {
+    func setBoardProps(board: BoardModel, onUpdateName: String -> (), onRemove: () -> ()) {
         self.board = board
         self.onUpdateName = onUpdateName
         self.onRemove = onRemove
@@ -41,7 +39,7 @@ class BoardCell : UICollectionViewCell, UITextFieldDelegate {
     }
     
     @IBAction func handleRemoval() {
-        onRemove!(self.board!)
+        onRemove!()
     }
     
     func setScoresViewDataSourceDelegate<D: protocol<UITableViewDataSource, UITableViewDelegate>>(dataSourceDelegate: D, forRow row: Int) {
