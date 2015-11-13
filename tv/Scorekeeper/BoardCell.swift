@@ -9,12 +9,16 @@ class BoardCell : UICollectionViewCell, UITextFieldDelegate {
     var board: BoardModel?
     var onUpdateName: (String -> ())?
     var onAddScore: (() -> ())?
-    var onRemove:( () -> ())?
+    var onRemove: (() -> ())?
     var scoresTotal: Int {
         guard let scores = board?.scores else { return 0 }
         return scores.reduce(0, combine: { total, score in total + score.value })
     }
-    
+    override var preferredFocusedView: UIView? {
+        guard let theBoard = board else { return nameField }
+        return theBoard.scores.count > 0 ? self.scoresView.cellForRowAtIndexPath(NSIndexPath(forRow: theBoard.scores.count - 1, inSection: 0)) : nameField
+    }
+
     func setBoardProps(board: BoardModel, onUpdateName: String -> (), onRemove: () -> ()) {
         self.board = board
         self.onUpdateName = onUpdateName
