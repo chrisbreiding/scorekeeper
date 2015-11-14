@@ -25,7 +25,7 @@ class BoardCell : UICollectionViewCell, UITextFieldDelegate {
         self.onRemove = onRemove
 
         nameField.text = board.name
-        scoresView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        scoresView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
         scoresTotalView.text = String(scoresTotal)
     }
 

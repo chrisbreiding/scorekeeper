@@ -45,10 +45,10 @@ class BoardsViewController : UICollectionViewController, UICollectionViewDelegat
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let width = indexPath.row < boards.count ? 500 : 100
+        let width = indexPath.row < boards.count ? 648 : 114
         return CGSize(width: width, height: 950)
     }
-    
+
     @IBAction func onAddBoard() {
         boards.append(BoardModel(id: newBoardId()))
         saveAndReload()
