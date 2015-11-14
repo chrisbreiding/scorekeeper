@@ -9,7 +9,8 @@ class BoardsViewController : UICollectionViewController, UICollectionViewDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        self.collectionView?.contentInset = UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 40)
         boards = Data.load()
         reloadCollectionData()
     }
@@ -45,7 +46,7 @@ class BoardsViewController : UICollectionViewController, UICollectionViewDelegat
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let width = indexPath.row < boards.count ? 648 : 114
+        let width = indexPath.row < boards.count ? 500 : 114
         return CGSize(width: width, height: 950)
     }
 
