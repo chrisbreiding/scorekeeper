@@ -124,7 +124,7 @@
                                                                             <outlet property="delegate" destination="wJV-hM-p5j" id="z0L-r3-ERC"/>
                                                                         </connections>
                                                                     </textField>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPI-o0-2sj">
+                                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bPI-o0-2sj">
                                                                         <rect key="frame" x="364" y="0.0" width="66" height="66"/>
                                                                         <animations/>
                                                                         <constraints>
@@ -293,7 +293,7 @@
     </scenes>
     <resources>
         <image name="Add Board Button" width="100" height="930"/>
-        <image name="Add Score Button" width="572" height="66"/>
+        <image name="Add Score Button" width="432" height="66"/>
         <image name="Background" width="1920" height="1080"/>
         <image name="Remove Button" width="66" height="66"/>
     </resources>

@@ -46,7 +46,7 @@ class BoardCell : UICollectionViewCell, UITextFieldDelegate {
         onRemove!()
     }
     
-    func setScoresViewDataSourceDelegate<D: protocol<UITableViewDataSource, UITableViewDelegate>>(dataSourceDelegate: D, forRow row: Int) {
+    func setScoresViewDataSourceDelegate(dataSourceDelegate: protocol<UITableViewDataSource, UITableViewDelegate>, forRow row: Int) {
         scoresView.delegate = dataSourceDelegate
         scoresView.dataSource = dataSourceDelegate
         scoresView.tag = row

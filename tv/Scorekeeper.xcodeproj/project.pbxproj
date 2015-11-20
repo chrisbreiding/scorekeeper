@@ -73,6 +73,7 @@
 				4B1F1A241BF03DFF00330E0E /* BoardCell.swift */,
 				4B1F1A1E1BEFF3EB00330E0E /* BoardModel.swift */,
 				4B1F1A221BF018F600330E0E /* BoardsViewController.swift */,
+				4B54F91C1BF617F600A8487A /* Data.swift */,
 				4B1F1A181BEFADC800330E0E /* Info.plist */,
 				4B1F1A131BEFADC800330E0E /* Main.storyboard */,
 				4B02A36B1BF17C4F00FE1BE5 /* ScoreCell.swift */,
@@ -80,7 +81,6 @@
 				4B54F9181BF5C30000A8487A /* SwiftyJSON.swift */,
 				4B1F1A111BEFADC800330E0E /* ViewController.swift */,
 				4B54F91A1BF6167100A8487A /* Util.swift */,
-				4B54F91C1BF617F600A8487A /* Data.swift */,
 			);
 			path = Scorekeeper;
 			sourceTree = "<group>";
