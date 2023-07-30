@@ -20,7 +20,7 @@ class _ScoreList extends Component<ScoreListProps> {
   edit = () => {
     const lastScore = this.props.scores[this.props.scores.length - 1]
 
-    if (lastScore && lastScore.isValid) {
+    if (lastScore && !lastScore.isValid) {
       this.editScore(lastScore)
     } else {
       this.editNewScore()
@@ -45,7 +45,7 @@ class _ScoreList extends Component<ScoreListProps> {
 
     if (nextScore) {
       this.editScore(nextScore)
-    } else if (!currentScore.isValid) {
+    } else if (currentScore.isValid) {
       this.editNewScore()
     }
   }
