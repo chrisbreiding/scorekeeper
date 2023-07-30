@@ -46,12 +46,49 @@
   color: #FFF;
   height: 2.6em;
   line-height: 1em;
-  padding: .8em;
+  padding: 0.8em;
+  padding-left: 2em;
   top: 0;
 }
 
 .name:focus {
   background: #506B38;
+}
+
+.rank {
+  color: #f8f8f8;
+  font-size: 1.2em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1em;
+  height: 2.2em;
+}
+
+.no-rank .rank {
+  display: none;
+}
+
+.rank:before {
+  border-top: solid 1.1em rgba(255, 255, 255, 0.2);
+  border-right: solid 1.1em transparent;
+  border-bottom: solid 1.1em transparent;
+  border-left: solid 1.1em rgba(255, 255, 255, 0.2);
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+}
+
+.rank span {
+  display: block;
+  font-size: 0.8em;
+  position: relative;
+  top: 3px;
+  left: 4px;
+  text-align: center;
 }
 
 .total {

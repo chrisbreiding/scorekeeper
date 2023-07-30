@@ -2,15 +2,39 @@
   "name": "scorekeeper",
   "version": "0.0.1",
   "private": true,
-  "devDependencies": {
-    "gulp": "~3.8.7",
-    "gulp-watch": "^0.6.9",
-    "gulp-zip": "^2.0.1",
-    "zunder": "~0.3.2"
+  "scripts": {
+    "build": "rm -rf dist && vite build",
+    "deploy": "echo 'Deploying via netlify' && git push origin $(git rev-parse --abbrev-ref HEAD):production",
+    "lint-fix": "npm run lint -- --fix",
+    "lint": "eslint 'src/*.+(ts|tsx)' 'src/**/*.+(ts|tsx)'",
+    "preview": "vite preview --port 8000",
+    "start": "vite",
+    "ts-check": "tsc"
   },
   "dependencies": {
-    "fastclick": "~1.0.3",
-    "react": "~0.11.1",
-    "rsvp": "~3.0.13"
+    "classnames": "^2.3.2",
+    "fastclick": "^1.0.6",
+    "lodash.debounce": "^4.0.8",
+    "mobx": "^6.10.0",
+    "mobx-react": "^9.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.22.9",
+    "@types/fastclick": "^1.0.30",
+    "@types/lodash.debounce": "^4.0.7",
+    "@types/react": "^18.2.16",
+    "@types/react-dom": "^18.2.7",
+    "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^6.2.0",
+    "@typescript-eslint/parser": "^6.2.0",
+    "@vitejs/plugin-react": "^4.0.3",
+    "eslint": "^8.45.0",
+    "eslint-plugin-crb": "^2.0.7",
+    "eslint-plugin-react": "^7.33.0",
+    "stylus": "^0.59.0",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.7"
   }
 }
