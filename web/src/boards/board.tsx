@@ -65,7 +65,7 @@ class _Board extends Component<BoardProps> {
       <div className='board'>
         <input
           ref={this.nameRef}
-          className='name'
+          className='board-name'
           placeholder='name...'
           defaultValue={this.props.board.name}
           onChange={this.updateName}
@@ -80,6 +80,7 @@ class _Board extends Component<BoardProps> {
           <span>×</span>
         </button>
         <ScoreList
+          // @ts-ignore
           ref={this.scoreListRef}
           scores={this.props.board.scores}
           onAdd={this.addScore}
