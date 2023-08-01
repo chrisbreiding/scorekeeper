@@ -82,6 +82,10 @@ export class BoardModel {
     }, 0)
   }
 
+  get hasValidScores () {
+    return this.scores.length && this.scores.some((score) => score.isValid)
+  }
+
   update = (props: BoardUpdate) => {
     Object.assign(this, props)
   }

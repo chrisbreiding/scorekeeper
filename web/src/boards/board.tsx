@@ -30,7 +30,13 @@ class _Board extends Component<BoardProps> {
   }
 
   remove = () => {
-    this.props.onRemove(this.props.board)
+    const { board, onRemove } = this.props
+    const name = board.name
+    const suffix = name ? ` for ${name}?` : '?'
+
+    if (!board.hasValidScores || window.confirm(`Remove board${suffix}`)) {
+      onRemove(this.props.board)
+    }
   }
 
   clearScores = () => {
